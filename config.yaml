@@ -1,0 +1,47 @@
+general:
+  timezone: "America/New_York"
+  out_dir: "out"
+
+sources:
+  greenhouse_companies_file: "data/companies_greenhouse.txt"
+  lever_companies_file: "data/companies_lever.txt"
+  max_per_company: 100
+
+filters:
+  include_keywords: ["accountant", "accounting", "revenue", "audit", "financial reporting", "tax", "netsuite", "asc 606"]
+  exclude_keywords: ["senior manager", "vp", "director", "unpaid"]
+  locations_include: ["remote", "miami", "new york", "usa"]
+  locations_exclude: ["on-site only", "hybrid nyc only"]
+  remote_only: false
+  min_salary_usd: 0
+  allow_internships: false
+  seniority_levels: ["associate", "staff", "senior", "analyst"]
+
+scoring:
+  skills_file: "data/skills.yaml"
+  weight_keyword_hit: 3.0
+  weight_skill_hit: 2.0
+  weight_remote: 1.0
+
+tailor:
+  resume_base: "resume/base_resume.md"
+  cover_template: "resume/cover_letter_template.md"
+  use_llm: false
+
+tracker:
+  csv_path: "out/jobs_log.csv"
+  google_sheets:
+    enabled: true
+    sheet_name: "Job Tracker"
+    creds_json_path: ""
+
+notify:
+  telegram:
+    enabled: false
+    chat_id_env: "TELEGRAM_CHAT_ID"
+    token_env: "TELEGRAM_BOT_TOKEN"
+
+apply:
+  selenium_enabled: false
+  browser: "chrome"
+  selectors: {}
